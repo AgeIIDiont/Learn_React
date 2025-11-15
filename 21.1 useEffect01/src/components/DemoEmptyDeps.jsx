@@ -8,7 +8,7 @@ export default function DemoEmptyDeps() {
   }, []);
   return (
     <>
-      <h3>Không truyền dependency</h3>
+      <h3>Rỗng dependency</h3>
       <button onClick={() => setCount(count + 1)}>Tăng</button>
       <p>Giá trị : {count}</p>
       {console.log("Render lại giao diện")}
