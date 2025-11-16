@@ -16,7 +16,7 @@ function Parent() {
   return (
     <div>
       <div>Giá trị đếm của cha: {count}</div>
-      <Child value={1} onButtonClick={handleIncrease} />
+      <Child value={count} onButtonClick={handleIncrease} />
     </div>
   );
 }
