@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TimeDemo from "./TimeDemo";
+import ResizeEventDemo from "./ResizeEventDemo";
 
 export default function Parent(){
     const [show, setShow] = useState(true);
@@ -7,7 +7,7 @@ export default function Parent(){
         return (
             <>
                 <button onClick={() => setShow(!show)}>{show ? 'Hide' : 'Show'}</button>
-                {show && <TimeDemo />}
+                {show && <ResizeEventDemo />}
             </>
         )
 }
