@@ -11,7 +11,7 @@ export default function Demo({number}) {
     return result;
   }
 
-  // Ghi nhớ kết quả tính toán, chỉ tính lại khi number thay đổi
+// Ghi nhớ kết quả tính toán, chỉ tính lại khi number thay đổi
   // const result = expensiveCalculation(number);
   const result = useMemo(() => expensiveCalculation(number), [number]);
   const [count, setCount] = useState(0);
