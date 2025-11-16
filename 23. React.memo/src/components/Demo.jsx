@@ -15,6 +15,7 @@ function Parent() {
     <div>
       <button onClick={() => setCount(count + 1)}>Tăng Cha</button>
       <div>Giá trị đếm của cha: {count}</div>
+      {console.log("Parent render")}
       <Child value={count} />
     </div>
   );
