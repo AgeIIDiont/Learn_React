@@ -2,8 +2,12 @@ import {useState, useEffect, useLayoutEffect} from "react";
 
 export default function Demo() {
   const [count, setCount] = useState(0);
-  useEffect(() => {
-    //useLayoutEffect(() => {
+  // useEffect(() => {
+  //   if (count > 2) {
+  //     setCount(0);
+  //   }
+  // }, [count]);
+  useLayoutEffect(() => {
     if (count > 2) {
       setCount(0);
     }
