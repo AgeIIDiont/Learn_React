@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import QUESTIONS from "../questions.js"
 import win from "../assets/quiz-complete.png"
 import QuestionTimer from "./QuestionTimer.jsx";
@@ -9,11 +9,16 @@ export default function Quiz() {
     const quizCompleted = activeQuestionIndex === QUESTIONS.length;
 
 
-    function handleSelectAnswer(selectedAnswer){
+    const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer){
         setUserAnswer((prevUserAnswers) => {
             return [...prevUserAnswers, selectedAnswer];
         });
-    }
+    }, []);
+
+    const handleSkipAnswer = useCallback(()=>{
+        handleSelectAnswer(null);
+    },[handleSelectAnswer])
+
 
     if(quizCompleted){
         return(
@@ -33,21 +38,21 @@ export default function Quiz() {
     }
     
     //tạo bản sao mảng gốc 0 để xáo trộn (0 làm thay đổi mảng gốc) -
-    const shuffledAnswers = [...QUESTIONS[1].answers];
+    const shuffledAnswers = [...QUESTIONS[activeQuestionIndex].answers];
     shuffleArray(shuffledAnswers);
 
     return(
         <>
             <div id="quiz">
                 <div id="question">
-                    <QuestionTimer timeout={10000} onTimeout={()=>{handleSelectAnswer(null)}} />
+                    <QuestionTimer key={activeQuestionIndex} timeout={10000} onTimeout={handleSkipAnswer} />
                     <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
                     <ul id="answers">
                         {/*{QUESTIONS[activeQuestionIndex].answers.map((answer)=>(*/}
-                        {shuffledAnswers.map((answer)=>(
-                            <li key = {answer} className="answer">
-                                <button onClick={()=>{handleSelectAnswer(answer)}}>
-                                    {answer}
+                        {shuffledAnswers.map((answers)=>(
+                            <li key = {answers} className="answer">
+                                <button onClick={()=>handleSelectAnswer(answers)}>
+                                    {answers}
                                 </button>
                             </li>
                         ))}
